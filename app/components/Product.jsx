@@ -11,6 +11,10 @@ const Product = () => {
     router.push(`/product/${id}`);
   };
 
+  const handleButtonClick = (e, id) => {
+    e.stopPropagation();
+  };
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-6">
       {cards.map((data) => (
@@ -36,7 +40,10 @@ const Product = () => {
                 </h2>
                 <p>{data.fields.description}</p>
                 <div className="card-actions justify-end">
-                  <button className="btn btn-primary">
+                  <button 
+                    className="btn btn-primary"
+                    onClick={(e) => handleButtonClick(e, data.sys.id)}
+                  >
                     {data.fields.button}
                   </button>
                 </div>

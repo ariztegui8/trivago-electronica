@@ -81,8 +81,8 @@ const Carrousel = () => {
                 // }}
                 >
                     {slider.map(data => (
-                        <SwiperSlide>
-                            <div key={data.sys.id} className="">
+                        <SwiperSlide key={data.sys.id}>
+                            <div  >
                                 <img className="h-60 md:h-96 w-full object-fill" src={data.fields.image.fields.file.url} />
                                 {/* <div className="card-body p-4 md:p-8">
                                         <h2 className="card-title text-xl font-bold text-custom-black">{data.title}</h2>

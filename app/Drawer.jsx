@@ -1,15 +1,24 @@
 "use client";
-import React from 'react'
+import React, { useState } from 'react'
 import Product from './components/Product';
 import Carrousel from './components/Carrousel';
 import Link from 'next/link';
 
 
 const Drawer = () => {
+
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const handleClick = () => {
+    if (drawerOpen) {
+      setDrawerOpen(false);
+    }
+  };
+
   return (
     <div>
       <div className="drawer">
-        <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
+        <input id="my-drawer-3" type="checkbox" className="drawer-toggle" checked={drawerOpen} onChange={() => setDrawerOpen(!drawerOpen)}/>
         <div className="drawer-content flex flex-col">
           {/* Navbar */}
           <div className="w-full navbar bg-base-300">
@@ -24,6 +33,9 @@ const Drawer = () => {
             <div className="flex-none hidden lg:block">
               <ul className="menu menu-horizontal p-0 flex gap-1">
                 {/* Navbar menu content here */}
+                <li>
+                  <Link href='/'>Home</Link>
+                </li>
                 <li>
                   <Link href='/about'>About</Link>
                 </li>
@@ -45,10 +57,13 @@ const Drawer = () => {
           <ul className="menu p-4 w-80 h-full bg-base-200">
             {/* Sidebar content here */}
             <li>
-            <Link href='/about'>About</Link>
+              <Link onClick={handleClick} href='/'>Home</Link>
             </li>
             <li>
-            <Link href='/contact'>Contact</Link>
+              <Link onClick={handleClick} href='/about'>About</Link>
+            </li>
+            <li>
+              <Link onClick={handleClick} href='/contact'>Contact</Link>
             </li>
 
           </ul>
