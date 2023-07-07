@@ -1,6 +1,7 @@
 "use client";
 import Drawer from './Drawer'
-import { DefaultProvider } from './context/DefaultProvider'
+import { CarrouselProvider } from './context/CarrouselProvider';
+import { ProductProvider } from './context/ProductProvider'
 import './globals.css'
 import { Inter } from 'next/font/google'
 
@@ -14,12 +15,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <DefaultProvider>
-        <body className={inter.className}>
-          <Drawer />
-          {children}
-        </body>
-      </DefaultProvider>
+      <CarrouselProvider>
+        <ProductProvider>
+          <body className={inter.className}>
+            <Drawer />
+            {children}
+          </body>
+        </ProductProvider>
+      </CarrouselProvider>
     </html>
   )
 }

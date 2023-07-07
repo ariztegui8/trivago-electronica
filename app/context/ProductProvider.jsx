@@ -1,11 +1,18 @@
 import { createContext, useEffect, useState } from "react"
 import { createClient } from 'contentful';
 
-const DefaultContext = createContext()
+const ProductContext = createContext()
 
-const DefaultProvider = ({children}) => {
+const ProductProvider = ({children}) => {
 
     const [cards, setCards] = useState([]);
+    const [search, setSearch] = useState('')
+
+    const results = !search ? cards : cards.filter((dato) => dato.fields.title?.toLowerCase().includes(search.toLowerCase()))
+
+    const handleChangeSearch = e => {
+      setSearch(e.target.value)
+    }
 
     const client = createClient({
         space: '85iynf6xw7x7',
@@ -27,18 +34,20 @@ const DefaultProvider = ({children}) => {
       }, []);
 
     return(
-        <DefaultContext.Provider
+        <ProductContext.Provider
             value={{
-                cards
+                cards,
+                results,
+                handleChangeSearch
             }}
         >
             {children}
-        </DefaultContext.Provider>
+        </ProductContext.Provider>
     )
 }
 
 export{
-    DefaultProvider
+  ProductProvider
 }
 
-export default DefaultContext
+export default ProductContext
